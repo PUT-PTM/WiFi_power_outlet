@@ -7,3 +7,5 @@ D:\Visual Studio 2017\Projects\ESP\ESP\obj\Debug\ESP.exe
 D:\Visual Studio 2017\Projects\ESP\ESP\obj\Debug\ESP.pdb
 D:\Visual Studio 2017\Projects\ESP\ESP\obj\Debug\ESP.csprojResolveAssemblyReference.cache
 D:\Visual Studio 2017\Projects\ESP\ESP\obj\Debug\ESP.MainWindow.resources
+D:\clouds\Google Drive\!PTM projekt\WiFi_power_outlet\Windows app\ESP\obj\Debug\ESP.exe
+D:\clouds\Google Drive\!PTM projekt\WiFi_power_outlet\Windows app\ESP\obj\Debug\ESP.pdb

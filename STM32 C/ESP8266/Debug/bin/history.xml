@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=ESP8266.map -O0 --gc-sections -LD:\CooCox\CoIDE\configuration\ProgramData\ESP8266 -TD:\CooCox\CoIDE\configuration\ProgramData\ESP8266/arm-gcc-link.ld -g">
-      <target file="ESP8266.elf" lastModified="15d95ea81d4">
-         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="15d95ea7c9c"/>
-         <source file="..\obj\stm32f4xx_usart.o" lastModified="15d95ea7d18"/>
-         <source file="..\obj\startup_stm32f4xx.o" lastModified="15d95ea7d5e"/>
-         <source file="..\obj\main.o" lastModified="15d95ea7dcc"/>
-         <source file="..\obj\stm32f4xx_rcc.o" lastModified="15d95ea7e4c"/>
-         <source file="..\obj\stm32f4xx_gpio.o" lastModified="15d95ea7eb3"/>
-         <source file="..\obj\system_stm32f4xx.o" lastModified="15d95ea7f24"/>
-         <source file="..\obj\stm32f4xx_exti.o" lastModified="15d95ea7f80"/>
-         <source file="..\obj\misc.o" lastModified="15d95ea7fd9"/>
+      <target file="ESP8266.elf" lastModified="15d98ea51f0">
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="15d98e86949"/>
+         <source file="..\obj\stm32f4xx_usart.o" lastModified="15d98e869c1"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="15d98e86a05"/>
+         <source file="..\obj\main.o" lastModified="15d98ea4f8d"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="15d98e86ae1"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="15d98e86b46"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="15d98e86b9c"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="15d98e86bf9"/>
+         <source file="..\obj\misc.o" lastModified="15d98e86c4f"/>
       </target>
    </processor>
 </history>

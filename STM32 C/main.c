@@ -58,11 +58,13 @@ int main(void);
 void configureUART(void);
 void configureRelays(void);
 void USART3_IRQHandler(void);
-// void recvUARTmsgFlush(void); //[NOT USED IN THIS VERSION]
+void handleMessage(char *); //ADDED
+void recvUARTmsgFlush(void); //USED IN THIS VERSION
 void initESP(void);
 void delay(int);
 void sendUARTmsg(char*);
-// int lengthOfString(char *); //[NOT USED IN THIS VERSION]
+int lengthOfString(char *); //USED IN THIS VERSION
+void setStatus(int, int); //ADDED
 
 /* ------definitions------- */
 
@@ -155,68 +157,55 @@ void USART3_IRQHandler(void){
 
 		//put received UART sign to recvUARTmsg
 		buff = USART3->DR;
+		recvUARTmsg[recvUARTmsgPos] = (char)buff;
 
-		//if last read char is '/' or  '.' or ',' then handle
-		if(buff == 126){  // '~'
-			if(GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_12)){
-				//00
-				if(GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_13)){
-					sendUARTmsg("AT+CIPSEND=0,4\r\n");
-					delay(10);
-					sendUARTmsg("00\r\n");
-				}
-				//01
-				else{
-					sendUARTmsg("AT+CIPSEND=0,4\r\n");
-					delay(10);
-					sendUARTmsg("01\r\n");
-				}
-			}
-			else if(!GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_12)){
-				//10
-				if(GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_13)){
-					sendUARTmsg("AT+CIPSEND=0,4\r\n");
-					delay(10);
-					sendUARTmsg("10\r\n");
-				}
-				//11
-				else{
-					sendUARTmsg("AT+CIPSEND=0,4\r\n");
-					delay(10);
-					sendUARTmsg("11\r\n");
-				}
-			}
-			else {
-				sendUARTmsg("AT+CIPSEND=0,6\r\n");
-				delay(10);
-				sendUARTmsg("err\r\n");
-			}
-		}
-		else if (buff == '#'){ // '#'
-			GPIO_ToggleBits(GPIOE, GPIO_Pin_12);
-			sendUARTmsg("AT+CIPSEND=0,12\r\n");
-			delay(10);
-			sendUARTmsg("toggled: 1\r\n");
-		}
-		else if (buff == '$'){ // '$'
-			GPIO_ToggleBits(GPIOE, GPIO_Pin_13);
-			sendUARTmsg("AT+CIPSEND=0,12\r\n");
-			delay(10);
-			sendUARTmsg("toggled: 2\r\n");
+		//if last read char is \n then handle whole message
+		if(buff == '\n'){
+			//message handler
+			handleMessage(recvUARTmsg);
+
+			//message buffer flasher
+			recvUARTmsgFlush();
+		} else {
+			//increase recvUARTmsg position
+			recvUARTmsgPos++;
 		}
 	}
 }
 
+/* UART received message handler */
+void handleMessage(char *msg){
+	char tempInp1[1] = {0};
+	char tempInp2[1] = {0};
+	int inp1 = 0;
+	int inp2 = 0;
+	int lenOfMsg = lengthOfString(msg);
+
+	delay(5);
+	if(strstr(msg, "getStatus()") != NULL){
+		getStatus();
+	}
+	else if(strstr(msg, "setStatus(") != NULL){
+		//learning the states from msg
+		tempInp1[0] = msg[lenOfMsg-5];
+		tempInp2[0] = msg[lenOfMsg-4];
+		inp1 = atoi(tempInp1);
+		inp2 = atoi(tempInp2);
+
+		setStatus(inp1, inp2);
+	}
+}
+
 /* Flushing UART receiving buffer [NOT USED IN THIS VERSION] */
-//void recvUARTmsgFlush(){
-//	//clear recvUARTmsg[]
-//	for(int i = 0; i<MaxMsgSize; i++){
-//		recvUARTmsg[i] = 0;
-//	}
-//
-//	//moving cursor back to position zero
-//	recvUARTmsgPos = 0;
-//}
+void recvUARTmsgFlush(){
+	//clear recvUARTmsg[]
+	for(int i = 0; i<MaxMsgSize; i++){
+		recvUARTmsg[i] = 0;
+	}
+
+	//moving cursor back to position zero
+	recvUARTmsgPos = 0;
+}
 
 /* Connect to WiFi network and starts server */
 void initESP(void){
@@ -266,14 +255,77 @@ void sendUARTmsg(char msg[MaxMsgSize]){
 }
 
 /* Returns length of given string in chars [NOT USED IN THIS VERSION]*/
-//int lengthOfString(char *str){
-//	int NOsigns = 0;
-//	while(str[NOsigns] != '\n'){
-//		NOsigns++;
-//	}
-//	return (NOsigns+1);
-//}
+int lengthOfString(char *str){
+	int NOsigns = 0;
+	while(str[NOsigns] != '\n'){
+		NOsigns++;
+	}
+	return (NOsigns+1);
+}
 
+/* Sends current sockets' status via WiFi */
+void getStatus(){
+	char statusBoard[3] = {0};
+	char socketState[1] = {0};
+
+	//Socket1:
+	if(GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_12)){
+		socketState[0] = "1";
+	}
+	else{
+		socketState[0] = "0";
+	}
+	strcat(statusBoard, socketState);
+
+	//Socket2:
+	if(GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_13)){
+		socketState[0] = "1";
+	}
+	else{
+		socketState[0] = "0";
+	}
+	strcat(statusBoard, socketState);
+
+	//Add ending to statusBoard
+	strcat(statusBoard, "\n");
+
+	//Send statusBoard via WiFi
+	sendUARTmsg("AT+CIPSEND=0,3\r\n");
+	delay(10);
+	sendUARTmsg(statusBoard);
+}
+
+/* Something does not work here (minor error with casting probably) */
+void setStatus(int input1, int input2){
+
+//	//---DEBUG ONLY---
+//	char statusBoard[MaxMsgSize] = {0};
+//	char socketState[3] = {0};
+//
+//	strcpy(statusBoard, "rcvd: ");
+//	itoa(input1, socketState, 10);
+//	strcat(statusBoard, socketState);
+//	itoa(input2, socketState, 10);
+//	strcat(statusBoard, socketState);
+//	strcat(statusBoard, "eomsg\r\n");
+//	sendUARTmsg(statusBoard);
+//	//---EOF DEBUG ONLY---
+
+
+	if(input1){
+		//toggle bit
+		GPIO_ToggleBits(GPIOD, GPIO_Pin_12);
+	}
+	if(input2){
+		//toggle bit
+		GPIO_ToggleBits(GPIOD, GPIO_Pin_13);
+	}
+
+	//Send status after switching
+	delay(100);
+	getStatus();
+
+}
 
 /*                  --------======BONUS======--------
 

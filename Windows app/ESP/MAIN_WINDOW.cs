@@ -84,7 +84,7 @@ namespace ESP
 
 		private void SOCKET1_BUTTON_Click(object sender, EventArgs e)
 		{
-			SendMsg(@"#");
+			SendMsg(@"setStatus(10)");
 
 			SOCKET1_STATE_LABEL.Text = (!IsSocket[0] ? "ON" : "OFF");
 			IsSocket[0] = !IsSocket[0];
@@ -93,7 +93,7 @@ namespace ESP
 
 		private void SOCKET2_BUTTON_Click(object sender, EventArgs e)
 		{
-			SendMsg(@"$");
+			SendMsg(@"setStatus(01)");
 
 			SOCKET2_STATE_LABEL.Text = (!IsSocket[1] ? "ON" : "OFF");
 			IsSocket[1] = !IsSocket[1];
@@ -155,7 +155,7 @@ namespace ESP
 
 			if (!IsConnected) return;
 			Thread.Sleep(1000);
-			SendMsg(@"~");
+			SendMsg(@"getStatus()");
 		}
 
 		private void ESP_IP_TextChanged(object sender, EventArgs e)
