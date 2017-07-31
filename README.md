@@ -29,7 +29,7 @@ ESP8266-01 to breadboard bridge (prevents loosen cables from causing resets; [ph
 External power supply (3.3V, 0.5A or higher)  
 <img src="readme-images/power-supply.jpg" alt="power supply" width="150px" />  
 Breadboard  
-<img src="readme-images/breadboard.jpg" alt="breadboard" width="150px" />  
+<img src="readme-images/breadboard.Jpg" alt="breadboard" width="150px" />  
 FT232 or other USART<->USB converter for debug  
 <img src="readme-images/ft232.jpg" alt="FT232" width="150px" />
 

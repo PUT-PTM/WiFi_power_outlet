@@ -29,7 +29,7 @@ Mostek pomiędzy ESP8266-01 a płytką prototypową (zapobiega resetom powodowan
 Zewnętrzny zasilacz (3.3V, min. 0.5A)  
 <img src="readme-images/power-supply.jpg" alt="power supply" width="150px" />  
 Płytka prototypowa  
-<img src="readme-images/breadboard.jpg" alt="breadboard" width="150px" />  
+<img src="readme-images/breadboard.Jpg" alt="breadboard" width="150px" />  
 FT232 lub inny konwerter USART<->USB dla testów  
 <img src="readme-images/ft232.jpg" alt="FT232" width="150px" />
 
