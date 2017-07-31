@@ -14,23 +14,23 @@ Projekt zawiera aplikację w języku C#, która może być użyta do sterowania 
 
 ## Narzędzia
 ### Potrzebne elementy
-* STM32F407G-DISC1  
-<img src="readme-images/stm32f407g-disc1.jpg" alt="STM32F407G-DISC1" width="150px" />
-* ESP8266-01  
-<img src="readme-images/esp8266-01.jpg" alt="ESP8266" width="150px" />
-* Moduł z dwoma przekaźnikami bądź dwa moduły z jednym przekaźnikiem w każdym  
-<img src="readme-images/relays.jpg" alt="2 relay module" width="150px" />
-* Kable  
+STM32F407G-DISC1  
+<img src="readme-images/stm32f407g-disc1.jpg" alt="STM32F407G-DISC1" width="150px" />  
+ESP8266-01  
+<img src="readme-images/esp8266-01.jpg" alt="ESP8266" width="150px" />  
+Moduł z dwoma przekaźnikami bądź dwa moduły z jednym przekaźnikiem w każdym  
+<img src="readme-images/relays.jpg" alt="2 relay module" width="150px" />  
+Kable  
 <img src="readme-images/cables.jpg" alt="cables" width="150px" />
 
 ### Zalecane opcjonalne elementy
-* Mostek pomiędzy ESP8266-01 a płytką prototypową (zapobiega resetom powodowanym przez luźno wpięte kable; [zdjęcia][ext12])  
-<img src="readme-images/esp-bridge.jpg" alt="ESP8266 breadboard bridge" width="150px" />
-* Zewnętrzny zasilacz (3.3V, min. 0.5A)  
-<img src="readme-images/power-supply.jpg" alt="power supply" width="150px" />
-* Płytka prototypowa  
-<img src="readme-images/breadboard.jpg" alt="breadboard" width="150px" />
-* FT232 lub inny konwerter USART<->USB dla testów  
+Mostek pomiędzy ESP8266-01 a płytką prototypową (zapobiega resetom powodowanym przez luźno wpięte kable; [zdjęcia][ext12])  
+<img src="readme-images/esp-bridge.jpg" alt="ESP8266 breadboard bridge" width="150px" />  
+Zewnętrzny zasilacz (3.3V, min. 0.5A)  
+<img src="readme-images/power-supply.jpg" alt="power supply" width="150px" />  
+Płytka prototypowa  
+<img src="readme-images/breadboard.jpg" alt="breadboard" width="150px" />  
+FT232 lub inny konwerter USART<->USB dla testów  
 <img src="readme-images/ft232.jpg" alt="FT232" width="150px" />
 
 ## Jak uruchomić
@@ -43,6 +43,7 @@ Projekt zawiera aplikację w języku C#, która może być użyta do sterowania 
 |   Tx    | PC11 Rx |  Rx/Tx   |
 |   VCC   |  VCC 3V | - |
 |  CH_PD  |  VCC 3V | - |
+
 Zaleca się użycie zewnętrznego źródła zasilania dla ESP8266.  
 Tx/Rx i Rx/Tx w kolumnie FT232 oznaczają zależność od testowanego kierunku komunikacji.  
 Należy odłączyć pin Tx od FT232 gdy ESP8266 jest podłączony do STM32.
