@@ -1,0 +1,9 @@
+D:\Visual Studio 2017\Projects\ESP\ESP\bin\Debug\ESP.exe.config
+D:\Visual Studio 2017\Projects\ESP\ESP\bin\Debug\ESP.exe
+D:\Visual Studio 2017\Projects\ESP\ESP\bin\Debug\ESP.pdb
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Debug\ESP.Properties.Resources.resources
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Debug\ESP.csproj.GenerateResource.Cache
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Debug\ESP.exe
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Debug\ESP.pdb
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Debug\ESP.csprojResolveAssemblyReference.cache
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Debug\ESP.MainWindow.resources

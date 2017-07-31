@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc 6.2.0 i686-w64-mingw32 -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -IC:\Users\Grabek\Desktop\WiFiAutomatics-master\ESP8266 STM32\cmsis_lib -IC:\Users\Grabek\Desktop\WiFiAutomatics-master\ESP8266 STM32\cmsis_boot -IC:\Users\Grabek\Desktop\WiFiAutomatics-master\ESP8266 STM32\cmsis_lib\include -IC:\Users\Grabek\Desktop\WiFiAutomatics-master\ESP8266 STM32\cmsis -IC:\Users\Grabek\Desktop\WiFiAutomatics-master -IC:\Users\Grabek\Desktop\WiFiAutomatics-master\ESP8266 STM32">
+      <target file="stm32f4xx_gpio.o" lastModified="15d698dca81">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="15ca119e9a8"/>
+      </target>
+      <target file="system_stm32f4xx.o" lastModified="15d698dcad8">
+         <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="15ca119e9a8"/>
+      </target>
+      <target file="startup_stm32f4xx.o" lastModified="15d698dc91d">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="15ca119e9a8"/>
+      </target>
+      <target file="stm32f4xx_usart.o" lastModified="15d698dc8b8">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="15ca119e9a8"/>
+      </target>
+      <target file="stm32f4xx_syscfg.o" lastModified="15d698dc82a">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="15ca119e9a8"/>
+      </target>
+      <target file="stm32f4xx_exti.o" lastModified="15d698dcb33">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_exti.c" lastModified="15ca119e9a8"/>
+      </target>
+      <target file="main.o" lastModified="15d698dc9a1">
+         <source file="..\..\..\main.c" lastModified="15ca119e9a8"/>
+      </target>
+      <target file="stm32f4xx_rcc.o" lastModified="15d698dca1b">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="15ca119e9a8"/>
+      </target>
+      <target file="misc.o" lastModified="15d698dcb8e">
+         <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="15ca119e9a8"/>
+      </target>
+   </processor>
+</history>

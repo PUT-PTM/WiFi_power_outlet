@@ -1,0 +1,8 @@
+D:\Visual Studio 2017\Projects\ESP\ESP\bin\Release\ESP.exe.config
+D:\Visual Studio 2017\Projects\ESP\ESP\bin\Release\ESP.exe
+D:\Visual Studio 2017\Projects\ESP\ESP\bin\Release\ESP.pdb
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Release\ESP.MainWindow.resources
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Release\ESP.Properties.Resources.resources
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Release\ESP.csproj.GenerateResource.Cache
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Release\ESP.exe
+D:\Visual Studio 2017\Projects\ESP\ESP\obj\Release\ESP.pdb
