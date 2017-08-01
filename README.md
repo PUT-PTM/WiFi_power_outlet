@@ -3,8 +3,9 @@
 **EN:** This is english version of readme doc. If you prefer, you may switch to polish version contained in [readme.PL.md][ext0].  
 **PL:** To jest angielska wersja pliku readme. Aby przejść do polskiej wersji otwórz plik [readme.PL.md][ext0].
 
-## Warning
-Be careful when coping with high voltages!
+## Warnings
+1) Be careful when coping with high voltages! Risk of electric shock!
+2) Project does not provide connection authorization, everyone can connect to opened WiFi network, sniff packets and send controlling data. Home usage is not recommended.
 
 ## Overview
 Make your life convenient. Use application to turn on and off power outlets via WiFi. Can be used with desk lamps, aquarium pumps, heaters, fans and many other.
@@ -24,7 +25,7 @@ Cables
 <img src="readme-images/cables.jpg" alt="cables" width="150px" />
 
 ### Recommended optional elements
-ESP8266-01 to breadboard bridge (prevents loosen cables from causing resets; [photos][ext12])  
+ESP8266-01 to breadboard bridge (prevents loosen cables from causing resets; [more photos][ext12])  
 <img src="readme-images/esp-bridge.jpg" alt="ESP8266 breadboard bridge" width="150px" />  
 External power supply (3.3V, 0.5A or higher)  
 <img src="readme-images/power-supply.jpg" alt="power supply" width="150px" />  
@@ -34,6 +35,7 @@ FT232 or other USART<->USB converter for debug
 <img src="readme-images/ft232.jpg" alt="FT232" width="150px" />
 
 ## How to run
+### Connections
 <img src="readme-images/connection-scheme.jpg" alt="Connection scheme" width="700px" />
 
 | ESP8266 |  STM32  | FT232 (debug) |
@@ -55,13 +57,20 @@ Disconnect FT232's Tx when ESP8266's Rx is connected to STM32.
 |   IN1   |   PE12  |
 |   IN2   |   PE13  |
 
-## How to compile
-STM32 code: Compile main.c with CooCox IDE. You may use provided *.coproj file which has all settings and repositories configured.  
-Windows app: Compile with Visual Studio.
+### Compilation
+STM32 code: Compile main.c with CooCox IDE. Used libraries can be found in main.c file at the begining. You may use provided *.coproj file which has all settings and repositories configured.  
+Windows app: Compile with Visual Studio, version 4.5.2 of .NET Framework is necessary.
+
+### Usage
+1) Connect to AI-Thinker network (open);
+2) Run compiled Windows app;
+3) Give ESP's IP and port (default 192.168.4.1) and click "Connect";
+4) Go to "Sockets" and use "SOCKET1" and "SOCKET2" buttons to switch relays' states.
 
 ## Future improvements
 - Support for 1-Wire DS18B20 thermometer;
-- On-time switching based on RTC.
+- On-time switching based on RTC;
+- Authorization and traffic encryption.
 
 ## Attributions
 Some configs are copied from Google Docs files from laboratory classes. Codes pulled from other repositories are marked with comments inside files.  
@@ -90,6 +99,8 @@ mateusz.grabuszynski[at]student.put.poznan.pl
 
 The project was conducted during the Microprocessor Lab course held by the Institute of Control and Information Engineering, Poznan University of Technology.  
 Supervisor: Marek Kraft
+
+Last change: 2017-08-01
 
 <!--LINKS-->
 [ext0]: readme.PL.md

@@ -3,8 +3,9 @@
 **PL:** To jest polska wersja pliku readme. Aby przejść do angielskiej wersji otwórz plik [readme.md][ext0].  
 **EN:** This is polish version of readme doc. If you prefer, you may switch to english version contained in [readme.md][ext0].  
 
-## Ostrzeżenie
-Uważaj podczas pracy z wysokim napięciem!
+## Ostrzeżenia
+1) Uważaj podczas pracy z wysokim napięciem! Występuje ryzyko porażenia!
+2) Projekt nie posiada obsługi uwierzytelniania połączenia, każda osoba może się połączyć do tworzonej sieci WiFi, podsłuchać pakiety i przesyłać dane przełączające przekaźniki. Nie zalecany do użytku domowego.
 
 ## Przegląd
 Uprość sobie życie. Użyj aplikacji by włączać i wyłączać gniazdka łącząc się z nimi po WiFi. Można jej używać do lampek, pomp akwariowych, grzejników elektrycznych, wiatraków i wielu innych.
@@ -24,7 +25,7 @@ Kable
 <img src="readme-images/cables.jpg" alt="cables" width="150px" />
 
 ### Zalecane opcjonalne elementy
-Mostek pomiędzy ESP8266-01 a płytką prototypową (zapobiega resetom powodowanym przez luźno wpięte kable; [zdjęcia][ext12])  
+Mostek pomiędzy ESP8266-01 a płytką prototypową (zapobiega resetom powodowanym przez luźno wpięte kable; [więcej zdjęć][ext12])  
 <img src="readme-images/esp-bridge.jpg" alt="ESP8266 breadboard bridge" width="150px" />  
 Zewnętrzny zasilacz (3.3V, min. 0.5A)  
 <img src="readme-images/power-supply.jpg" alt="power supply" width="150px" />  
@@ -34,6 +35,7 @@ FT232 lub inny konwerter USART<->USB dla testów
 <img src="readme-images/ft232.jpg" alt="FT232" width="150px" />
 
 ## Jak uruchomić
+### Podłączenie
 <img src="readme-images/connection-scheme.jpg" alt="Connection scheme" width="700px" />
 
 | ESP8266 |  STM32  | FT232 (testy) |
@@ -55,13 +57,20 @@ Należy odłączyć pin Tx od FT232 gdy ESP8266 jest podłączony do STM32.
 |   IN1   |   PE12  |
 |   IN2   |   PE13  |
 
-## Jak skompilować
-Kod dla STM32: Skompiluj program main.c przy użyciu środowiska CooCox IDE. Dla wygody, możesz użyć dostarczonego pliku w formacie *.coproj, w którym ustawiono już wszystkie repozytoria.  
-Aplikacja Windows: Skompiluj przy użyciu Visual Studio.
+### Kompilacja
+Kod dla STM32: Skompiluj program main.c przy użyciu środowiska CooCox IDE. Używane biblioteki znajdziesz w pliku main.c na górze. Dla wygody, możesz użyć dostarczonego pliku w formacie *.coproj, w którym ustawiono już wszystkie repozytoria.  
+Aplikacja Windows: Skompiluj przy użyciu Visual Studio, wymagana wersja 4.5.2 .NET Framework.
+
+### Użycie
+1) Połącz się z siecią AI-Thinker (otwarta);
+2) Uruchom skompilowaną aplikację dla Windows;
+3) Podaj IP płytki ESP (domyślnie 192.168.4.1) i kliknij "Connect";
+4) Przejdź do zakładki "Sockets" i użyj guzików "SOCKET1" oraz "SOCKET2" do przełączania stanów przekaźników.
 
 ## Przyszłe usprawnienia
 - Dodanie wsparcia dla termometru DS18B20;
-- Przełączanie zależne od czasu oparte na zegarze czasu rzeczywistego.
+- Przełączanie zależne od czasu oparte na zegarze czasu rzeczywistego;
+- Autoryzacja oraz szyfrowanie ruchu.
 
 ## Przypisy
 Niektóre elementy konfiguracji zostały przekopiowane z plików zawartych na Google Docs, które dostarczono podczas zajęć laboratoryjnych. Kod przepisany z innych repozytoriów zaznaczono komentarzami w plikach.
@@ -89,6 +98,8 @@ dawid.korach[at]student.put.poznan.pl
 mateusz.grabuszynski[at]student.put.poznan.pl
 
 Projekt wykonano podczas zajęć laboratoryjnych Podstaw technik mikroprocesorowych prowadzonych przez Instytut Automatyki i Inżynierii Informatycznej Politechniki Poznańskiej pod nadzorem dra Marka Krafta.
+
+Ostatnia zmiana: 1.08.2017
 
 <!--LINKS-->
 [ext0]: readme.PL.md
