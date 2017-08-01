@@ -4,8 +4,8 @@
 <window>
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="org.eclipse.debug.ui.ExpressionView"/>
-<orientation position="512" view="org.coocox.builder.ui.views.ProjectView"/>
 <orientation position="512" view="org.coocox.component.ui.ComponentView"/>
+<orientation position="512" view="org.coocox.builder.ui.views.ProjectView"/>
 <orientation position="512" view="org.coocox.codebugger.trace.ui.traceview"/>
 <orientation position="512" view="org.eclipse.debug.ui.DebugView"/>
 <orientation position="512" view="org.eclipse.ui.console.ConsoleView"/>
@@ -26,14 +26,18 @@
 </editorArea>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="D:/clouds/Google Drive/!PTM projekt/WiFi_power_outlet/STM32 C/main.c" title="main.c" tooltip="D:/clouds/Google Drive/!PTM projekt/WiFi_power_outlet/STM32 C/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ESP8266/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="990" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5643" selectionTopPixel="2796"/>
 </editor>
 </editors>
 <views>
 <view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
-<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
+<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="4">
 <expanded>
 <element path="/ESP8266"/>
+<element path="/ESP8266/cmsis"/>
+<element path="/ESP8266/cmsis_lib"/>
+<element path="/ESP8266/cmsis_lib/include"/>
+<element path="/ESP8266/cmsis_lib/source"/>
 </expanded>
 <selection>
 <element path="/ESP8266/main.c"/>
@@ -122,9 +126,14 @@
 </presentation>
 </folder>
 </info>
-<info part="org.coocox.builder.ui.exampleView" ratio="0.1594509" ratioLeft="151" ratioRight="796" relationship="2" relative="org.eclipse.ui.internal.ViewStack@fccd15"/>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@fa1b74" ratio="0.8663304" ratioLeft="687" ratioRight="106" relationship="2" relative="org.coocox.builder.ui.exampleView">
-<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@cab1d1" ratio="0.1594509" ratioLeft="151" ratioRight="796" relationship="2" relative="org.eclipse.ui.internal.ViewStack@fccd15">
+<folder appearance="2" expanded="2">
+<page content="org.coocox.builder.ui.exampleView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@fa1b74" ratio="0.8663304" ratioLeft="687" ratioRight="106" relationship="2" relative="org.eclipse.ui.internal.ViewStack@cab1d1">
+<folder activePageID="org.coocox.component.ui.Help" appearance="2" expanded="2">
 <page content="org.coocox.component.ui.Help" label="Help"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
@@ -136,7 +145,7 @@
 </presentation>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.44952178" ratioLeft="423" ratioRight="518" relationship="4" relative="org.coocox.builder.ui.exampleView"/>
+<info part="org.eclipse.ui.editorss" ratio="0.44952178" ratioLeft="423" ratioRight="518" relationship="4" relative="org.eclipse.ui.internal.ViewStack@cab1d1"/>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@fc38e0" ratio="0.36981934" ratioLeft="348" ratioRight="593" relationship="4" relative="org.eclipse.ui.internal.ViewStack@fccd15">
 <folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">
 <page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
@@ -244,33 +253,6 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/ESP8266/main.c"/>
 <editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" uri="file:/d:/program%20files%20(x86)/gnu%20tools%20arm%20embedded/5.4%202016q3/arm-none-eabi/include/string.h"/>
 </editors>
-<item historyLabel="main.c" index="0">
-<position/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1857" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="7486" y="11"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="5066" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="5389" y="13"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="5619" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="7486" y="11"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="5036" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="4977" y="0"/>
-</item>
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="7486" y="11"/>
 </item>
@@ -391,8 +373,35 @@
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="1994" y="0"/>
 </item>
-<item active="true" historyLabel="main.c" index="0">
+<item historyLabel="main.c" index="0">
 <position info="not_deleted" x="7546" y="14"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="5029" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="1710" y="11"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="7580" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="7580" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="7617" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="7917" y="0"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="2208" y="17"/>
+</item>
+<item historyLabel="main.c" index="0">
+<position info="not_deleted" x="8708" y="3"/>
+</item>
+<item active="true" historyLabel="main.c" index="0">
+<position info="not_deleted" x="1909" y="37"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
