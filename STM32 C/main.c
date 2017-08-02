@@ -26,13 +26,10 @@
  *
  *
  *   Important information:
- *   (???) 1. All messages must be ended with <LF> a.k.a. '\n' sign.
+ *   1. All messages must be ended with Line Feed (a.k.a. '\n') sign.
  *
  *   To be done:
- *   1) Check this ^
- *   2) Bring back parsed messages (backed up on 2017-07-16 at 15:54)
  *   3) Change ints to uint_xs
- *   4) Add information about connection to readmes
  */
 
 
@@ -58,14 +55,14 @@ int main(void);
 void configureUART(void);
 void configureRelays(void);
 void USART3_IRQHandler(void);
-void handleMessage(char *); //ADDED
-void recvUARTmsgFlush(void); //USED IN THIS VERSION
+void handleMessage(char *);
+void recvUARTmsgFlush(void);
 void initESP(void);
-void delay(int);
+void delay(uint32_t);
 void sendUARTmsg(char*);
-int lengthOfString(char *); //USED IN THIS VERSION
+uint16_t lengthOfString(char *);
 void getStatus(void);
-void setStatus(int, int); //ADDED
+void setStatus(uint8_t, uint8_t);
 
 /* ------definitions------- */
 
@@ -180,7 +177,7 @@ void handleMessage(char *msg){
 	char tempInp2[1] = {0};
 	int inp1 = 0;
 	int inp2 = 0;
-	int lenOfMsg = lengthOfString(msg);
+	uint16_t lenOfMsg = lengthOfString(msg);
 
 	delay(5);
 	if(strstr(msg, "getStatus()") != NULL){
@@ -200,7 +197,7 @@ void handleMessage(char *msg){
 /* Flushing UART receiving buffer [NOT USED IN THIS VERSION] */
 void recvUARTmsgFlush(){
 	//clear recvUARTmsg[]
-	for(int i = 0; i<MaxMsgSize; i++){
+	for(uint8_t i = 0; i<MaxMsgSize; i++){
 		recvUARTmsg[i] = 0;
 	}
 
@@ -242,22 +239,22 @@ void initESP(void){
 }
 
 /* Delays inside */
-void delay(volatile int s){
+void delay(volatile uint32_t s){
 	s *= 24;
 	while(s--);
 }
 
 /* Sends message via UART (last sign must be NULL sign, which is not send) */
 void sendUARTmsg(char msg[MaxMsgSize]){
-	for(int i=0; msg[i] != '\0'; i++){
+	for(uint8_t i=0; msg[i] != '\0'; i++){
 		USART_SendData(USART3, msg[i]);
 		delay(500);
 	}
 }
 
 /* Returns length of given string in chars [NOT USED IN THIS VERSION]*/
-int lengthOfString(char *str){
-	int NOsigns = 0;
+uint16_t lengthOfString(char *str){
+	uint16_t NOsigns = 0;
 	while(str[NOsigns] != '\n'){
 		NOsigns++;
 	}
@@ -293,7 +290,7 @@ void getStatus(){
 }
 
 /* Something does not work here (minor error with casting probably) */
-void setStatus(int input1, int input2){
+void setStatus(uint8_t input1, uint8_t input2){
 	if(input1){
 		sendUARTmsg("AT+CIPSEND=0,19\r\n");
 		delay(10);
