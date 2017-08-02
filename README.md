@@ -64,7 +64,7 @@ Windows app: Compile with Visual Studio, version 4.5.2 of .NET Framework is nece
 ### Usage
 1) Connect to AI-Thinker network (open);
 2) Run compiled Windows app;
-3) Give ESP's IP and port (default 192.168.4.1) and click "Connect";
+3) Give ESP's IP and port (default 192.168.4.1:80) and click "Connect";
 4) Go to "Sockets" and use "SOCKET1" and "SOCKET2" buttons to switch relays' states.
 
 ## Future improvements

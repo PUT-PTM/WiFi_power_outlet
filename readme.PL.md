@@ -64,7 +64,7 @@ Aplikacja Windows: Skompiluj przy użyciu Visual Studio, wymagana wersja 4.5.2 .
 ### Użycie
 1) Połącz się z siecią AI-Thinker (otwarta);
 2) Uruchom skompilowaną aplikację dla Windows;
-3) Podaj IP płytki ESP (domyślnie 192.168.4.1) i kliknij "Connect";
+3) Podaj IP płytki ESP (domyślnie 192.168.4.1:80) i kliknij "Connect";
 4) Przejdź do zakładki "Sockets" i użyj guzików "SOCKET1" oraz "SOCKET2" do przełączania stanów przekaźników.
 
 ## Przyszłe usprawnienia
