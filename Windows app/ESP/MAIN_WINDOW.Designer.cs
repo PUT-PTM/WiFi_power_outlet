@@ -57,7 +57,6 @@
 			this.ESP_IP.Size = new System.Drawing.Size(95, 20);
 			this.ESP_IP.TabIndex = 0;
 			this.ESP_IP.Text = "192.168.4.1";
-			this.ESP_IP.TextChanged += new System.EventHandler(this.ESP_IP_TextChanged);
 			// 
 			// ESP_PORT
 			// 
@@ -97,7 +96,6 @@
 			this.SOCKET1_STATE_LABEL.Size = new System.Drawing.Size(10, 13);
 			this.SOCKET1_STATE_LABEL.TabIndex = 4;
 			this.SOCKET1_STATE_LABEL.Text = "-";
-			this.SOCKET1_STATE_LABEL.Click += new System.EventHandler(this.SOCKET1_STATE_LABEL_Click);
 			// 
 			// SOCKET2_STATE_LABEL
 			// 
@@ -107,7 +105,6 @@
 			this.SOCKET2_STATE_LABEL.Size = new System.Drawing.Size(10, 13);
 			this.SOCKET2_STATE_LABEL.TabIndex = 5;
 			this.SOCKET2_STATE_LABEL.Text = "-";
-			this.SOCKET2_STATE_LABEL.Click += new System.EventHandler(this.SOCKET2_STATE_LABEL_Click);
 			// 
 			// ESP_CONNECT_BUTTON
 			// 
@@ -143,7 +140,6 @@
 			this.TAB_CONNECTION.TabIndex = 0;
 			this.TAB_CONNECTION.Text = "Connection";
 			this.TAB_CONNECTION.UseVisualStyleBackColor = true;
-			this.TAB_CONNECTION.Click += new System.EventHandler(this.TabPage1_Click);
 			// 
 			// Label_Port
 			// 
@@ -162,7 +158,6 @@
 			this.Label_Adres_IP.Size = new System.Drawing.Size(60, 13);
 			this.Label_Adres_IP.TabIndex = 7;
 			this.Label_Adres_IP.Text = "IP address:";
-			this.Label_Adres_IP.Click += new System.EventHandler(this.Label_Adres_IP_Click);
 			// 
 			// TAB_SOCKETS
 			// 
@@ -177,7 +172,6 @@
 			this.TAB_SOCKETS.TabIndex = 1;
 			this.TAB_SOCKETS.Text = "Sockets";
 			this.TAB_SOCKETS.UseVisualStyleBackColor = true;
-			this.TAB_SOCKETS.Click += new System.EventHandler(this.TAB_SOCKETS_Click);
 			// 
 			// RECIVED_MESSAGE_LABEL
 			// 
@@ -187,7 +181,6 @@
 			this.RECIVED_MESSAGE_LABEL.Size = new System.Drawing.Size(108, 13);
 			this.RECIVED_MESSAGE_LABEL.TabIndex = 10;
 			this.RECIVED_MESSAGE_LABEL.Text = "Received from server";
-			this.RECIVED_MESSAGE_LABEL.Click += new System.EventHandler(this.RECIVED_MESSAGE_LABEL_Click);
 			// 
 			// MSG_READER_WORKER
 			// 
@@ -202,7 +195,6 @@
 			this.RECIVED_MSG_TEXTBOX.Name = "RECIVED_MSG_TEXTBOX";
 			this.RECIVED_MSG_TEXTBOX.Size = new System.Drawing.Size(200, 95);
 			this.RECIVED_MSG_TEXTBOX.TabIndex = 11;
-			this.RECIVED_MSG_TEXTBOX.SelectedIndexChanged += new System.EventHandler(this.RECIVED_MSG_TEXTBOX_SelectedIndexChanged);
 			// 
 			// SENT_MESSAGE_LABEL
 			// 
@@ -212,7 +204,6 @@
 			this.SENT_MESSAGE_LABEL.Size = new System.Drawing.Size(73, 13);
 			this.SENT_MESSAGE_LABEL.TabIndex = 14;
 			this.SENT_MESSAGE_LABEL.Text = "Sent to server";
-			this.SENT_MESSAGE_LABEL.Click += new System.EventHandler(this.SENT_MESSAGE_LABEL_Click);
 			// 
 			// SENT_MSG_TEXTBOX
 			// 
@@ -234,7 +225,6 @@
 			this.Controls.Add(this.tabControl1);
 			this.Name = "MainWindow";
 			this.Text = "ESP Connection graphical interface";
-			this.Load += new System.EventHandler(this.MAIN_WINDOW_Load);
 			this.tabControl1.ResumeLayout(false);
 			this.TAB_CONNECTION.ResumeLayout(false);
 			this.TAB_CONNECTION.PerformLayout();
