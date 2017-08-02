@@ -4,12 +4,12 @@
       <source file="..\..\..\cmsis_lib\include\stm32f4xx_syscfg.h" lastModified="15d98b36f48">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
-      <source file="..\..\..\cmsis\core_cmInstr.h" lastModified="15d98b376cc">
-      </source>
       <source file="..\..\..\cmsis\core_cm4.h" lastModified="15d98b372c9">
          <include file="..\..\..\cmsis\core_cmInstr.h"/>
          <include file="..\..\..\cmsis\core_cmFunc.h"/>
          <include file="..\..\..\cmsis\core_cm4_simd.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cmInstr.h" lastModified="15d98b376cc">
       </source>
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="15d98b36f6d">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_syscfg.h"/>
@@ -29,6 +29,11 @@
       <source file="..\..\..\cmsis_lib\include\misc.h" lastModified="15d98b36f2e">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
+      <source file="..\..\..\cmsis_boot\stm32f4xx.h" lastModified="15d98b372fd">
+         <include file="..\..\..\cmsis\core_cm4.h"/>
+         <include file="..\..\..\cmsis_boot\system_stm32f4xx.h"/>
+         <include file="..\..\..\cmsis_boot\stm32f4xx_conf.h"/>
+      </source>
       <source file="..\..\..\cmsis_boot\stm32f4xx_conf.h" lastModified="15d98b3b953">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_exti.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
@@ -36,11 +41,6 @@
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_syscfg.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
          <include file="..\..\..\cmsis_lib\include\misc.h"/>
-      </source>
-      <source file="..\..\..\cmsis_boot\stm32f4xx.h" lastModified="15d98b372fd">
-         <include file="..\..\..\cmsis\core_cm4.h"/>
-         <include file="..\..\..\cmsis_boot\system_stm32f4xx.h"/>
-         <include file="..\..\..\cmsis_boot\stm32f4xx_conf.h"/>
       </source>
       <source file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h" lastModified="15d98b36f4f">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
@@ -51,6 +51,15 @@
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="15d98b36f73">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+      </source>
+      <source file="..\..\..\main.c" lastModified="15da3a90d86">
+         <include file="..\..\..\cmsis_lib\include\misc.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_exti.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_syscfg.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_usart.h"/>
+         <include file="..\..\..\cmsis_boot\stm32f4xx_conf.h"/>
       </source>
       <source file="..\..\..\cmsis\core_cmFunc.h" lastModified="15d98b376c5">
       </source>

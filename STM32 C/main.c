@@ -64,6 +64,7 @@ void initESP(void);
 void delay(int);
 void sendUARTmsg(char*);
 int lengthOfString(char *); //USED IN THIS VERSION
+void getStatus(void);
 void setStatus(int, int); //ADDED
 
 /* ------definitions------- */
@@ -265,65 +266,54 @@ int lengthOfString(char *str){
 
 /* Sends current sockets' status via WiFi */
 void getStatus(){
-	char statusBoard[3] = {0};
-	char socketState[1] = {0};
-
-	//Socket1:
-	if(GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_12)){
-		socketState[0] = "1";
+	if(!GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_12)){
+		if(!GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_13)){
+			sendUARTmsg("AT+CIPSEND=0,3\r\n");
+			delay(10);
+			sendUARTmsg("11\n");
+		}
+		else{
+			sendUARTmsg("AT+CIPSEND=0,3\r\n");
+			delay(10);
+			sendUARTmsg("10\n");
+		}
 	}
 	else{
-		socketState[0] = "0";
+		if(!GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_13)){
+			sendUARTmsg("AT+CIPSEND=0,3\r\n");
+			delay(10);
+			sendUARTmsg("01\n");
+		}
+		else{
+			sendUARTmsg("AT+CIPSEND=0,3\r\n");
+			delay(10);
+			sendUARTmsg("00\n");
+		}
 	}
-	strcat(statusBoard, socketState);
-
-	//Socket2:
-	if(GPIO_ReadOutputDataBit(GPIOE, GPIO_Pin_13)){
-		socketState[0] = "1";
-	}
-	else{
-		socketState[0] = "0";
-	}
-	strcat(statusBoard, socketState);
-
-	//Add ending to statusBoard
-	strcat(statusBoard, "\n");
-
-	//Send statusBoard via WiFi
-	sendUARTmsg("AT+CIPSEND=0,3\r\n");
-	delay(10);
-	sendUARTmsg(statusBoard);
 }
 
 /* Something does not work here (minor error with casting probably) */
 void setStatus(int input1, int input2){
-
-//	//---DEBUG ONLY---
-//	char statusBoard[MaxMsgSize] = {0};
-//	char socketState[3] = {0};
-//
-//	strcpy(statusBoard, "rcvd: ");
-//	itoa(input1, socketState, 10);
-//	strcat(statusBoard, socketState);
-//	itoa(input2, socketState, 10);
-//	strcat(statusBoard, socketState);
-//	strcat(statusBoard, "eomsg\r\n");
-//	sendUARTmsg(statusBoard);
-//	//---EOF DEBUG ONLY---
-
-
 	if(input1){
+		sendUARTmsg("AT+CIPSEND=0,19\r\n");
+		delay(10);
+		sendUARTmsg("1st socket toggled\n");
+
 		//toggle bit
-		GPIO_ToggleBits(GPIOD, GPIO_Pin_12);
+		GPIO_ToggleBits(GPIOE, GPIO_Pin_12);
 	}
 	if(input2){
+		sendUARTmsg("AT+CIPSEND=0,19\r\n");
+		delay(10);
+		sendUARTmsg("2nd socket toggled\n");
+
 		//toggle bit
-		GPIO_ToggleBits(GPIOD, GPIO_Pin_13);
+		GPIO_ToggleBits(GPIOE, GPIO_Pin_13);
 	}
 
 	//Send status after switching
-	delay(100);
-	getStatus();
+//	delay(100);
+//	getStatus();
 
 }
 
