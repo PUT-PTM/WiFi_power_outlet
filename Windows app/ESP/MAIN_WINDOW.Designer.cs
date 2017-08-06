@@ -231,6 +231,8 @@
 			// 
 			// SEND_TO_SERV_BUTTON_CLICK
 			// 
+			this.SEND_TO_SERV_BUTTON_CLICK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.SEND_TO_SERV_BUTTON_CLICK.Enabled = false;
 			this.SEND_TO_SERV_BUTTON_CLICK.Location = new System.Drawing.Point(163, 128);
 			this.SEND_TO_SERV_BUTTON_CLICK.Name = "SEND_TO_SERV_BUTTON_CLICK";
@@ -242,6 +244,8 @@
 			// 
 			// SEND_MSG_RICHBOX
 			// 
+			this.SEND_MSG_RICHBOX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.SEND_MSG_RICHBOX.Enabled = false;
 			this.SEND_MSG_RICHBOX.Location = new System.Drawing.Point(12, 128);
 			this.SEND_MSG_RICHBOX.Name = "SEND_MSG_RICHBOX";
@@ -263,6 +267,7 @@
 			this.Controls.Add(this.tabControl1);
 			this.Name = "MainWindow";
 			this.Text = "ESP Connection graphical interface";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
 			this.tabControl1.ResumeLayout(false);
 			this.TAB_CONNECTION.ResumeLayout(false);
 			this.TAB_CONNECTION.PerformLayout();

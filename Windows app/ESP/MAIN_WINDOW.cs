@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using System;
 
 namespace ESP
 {
@@ -15,6 +15,16 @@ namespace ESP
 		public MainWindow()
 		{
 			InitializeComponent();
+		}
+
+		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			MSG_READER_WORKER.CancelAsync();
+
+			if(IsConnected)
+			{
+				_tcp.Tcp.Close();
+			}
 		}
 
 		/**********************************************************************************************************************************************/
@@ -199,7 +209,7 @@ namespace ESP
 		/*	BUTTONS	*/
 
 		private void SOCKET1_BUTTON_Click(object sender, EventArgs e)
-		{	
+		{
 			/*	Make sure the connection is set	*/
 			if(!IsConnected) return;
 
@@ -227,13 +237,12 @@ namespace ESP
 			var oldValue = Ip;
 
 			try
-			{	
+			{
 				/*	Validating IP address on button click	*/
 				if(ESP_IP.Text != "" && ESP_IP.Text.Length >= 7)
 				{
 					Ip = IPAddress.Parse(ESP_IP.Text).ToString();
 				}
-
 
 				/*	The connection IS NOT set & trying to connect	*/
 				if(!IsConnected)
@@ -258,7 +267,7 @@ namespace ESP
 
 					ESP_CONNECT_BUTTON.Text = @"Disconnecting...";
 					ESP_CONNECT_BUTTON.Enabled = false;
-					
+
 					/*	Set sockets and theirs description to default state	*/
 					SOCKET1_STATE_LABEL.Text = @"-";
 					SOCKET2_STATE_LABEL.Text = @"-";
@@ -294,7 +303,7 @@ namespace ESP
 
 			/*	If connection IS set, sent a querry to server about actual sockets state*/
 			if(!IsConnected) return;
-			Thread.Sleep(1000); 
+			Thread.Sleep(1000);
 			SendMsg(@"getStatus()");
 		}
 
