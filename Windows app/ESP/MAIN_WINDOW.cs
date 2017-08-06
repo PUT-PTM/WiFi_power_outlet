@@ -9,15 +9,33 @@ namespace ESP
 {
 	public partial class MainWindow : Form
 	{
+		/**********************************************************************************************************************************************/
+		/* INITIALIZATION OF PROGRAM	*/
+
+		public MainWindow()
+		{
+			InitializeComponent();
+		}
+
+		/**********************************************************************************************************************************************/
+		/*	GLOBAB VARIABLES	*/
+
 		private TCP _tcp = new TCP();
 
 		private string Ip { get; set; } = "192.168.4.1";
 		private int Port { get; set; } = 80;
 		private bool IsConnected { get; set; }
 
-		public bool[] IsSocket { get; } = new bool[2];
+		private bool[] IsSocket { get; } = new bool[2];
+
+		private string ToBeSend { get; set; } = "";
+
+		private string ToBeSendOldValue { get; set; } = "";
 
 		private const int BufferSize = 100;
+
+		/**********************************************************************************************************************************************/
+		/*	USEFUL METHODS	*/
 
 		private static void ExceptionHandler(Exception e)
 		{
@@ -39,11 +57,6 @@ namespace ESP
 
 				, (@"Error - " + DateTime.Now)
 			);
-		}
-
-		public MainWindow()
-		{
-			InitializeComponent();
 		}
 
 		private void SendMsg(string text)
@@ -79,7 +92,106 @@ namespace ESP
 			}
 		}
 
+		private void SetElementsAvaible(bool connection)
+		{
+			if(connection)
+			{
+				ESP_CONNECT_BUTTON.Enabled = true;
+				ESP_IP.Enabled = false;
+				ESP_PORT.Enabled = false;
+				SEND_MSG_RICHBOX.Enabled = true;
+				SEND_TO_SERV_BUTTON_CLICK.Enabled = true;
+				SOCKET1_BUTTON.Enabled = true;
+				SOCKET2_BUTTON.Enabled = true;
+			}
+			else
+			{
+				ESP_CONNECT_BUTTON.Enabled = true;
+				ESP_IP.Enabled = true;
+				ESP_PORT.Enabled = true;
+				SEND_MSG_RICHBOX.Enabled = false;
+				SEND_TO_SERV_BUTTON_CLICK.Enabled = false;
+				SOCKET1_BUTTON.Enabled = false;
+				SOCKET2_BUTTON.Enabled = false;
+			}
+		}
+
+		private void SetSocet(string txt)
+		{
+			switch(txt[0])
+			{
+				case '1':
+					IsSocket[0] = true;
+					break;
+
+				case '0':
+					IsSocket[0] = false;
+					break;
+			}
+
+			switch(txt[1])
+			{
+				case '1':
+					IsSocket[1] = true;
+					break;
+
+				case '0':
+					IsSocket[1] = false;
+					break;
+			}
+		}
+
 		/**********************************************************************************************************************************************/
+		/*	WORKERS	*/
+
+		private void MSG_READER_WORKER_DoWork(object sender, DoWorkEventArgs e)
+		{
+			while(IsConnected)
+			{
+				var byteBuffer = new byte[BufferSize];
+				var message = "";
+
+				try
+				{
+					if(MSG_READER_WORKER == null || (!MSG_READER_WORKER.IsBusy || MSG_READER_WORKER.CancellationPending))
+					{
+						return;
+					}
+
+					_tcp.StreamData = _tcp.Tcp.GetStream();
+					var numberOfRecived = _tcp.StreamData.Read(byteBuffer, 0, BufferSize);
+
+					for(var i = 0; i < numberOfRecived; i++)
+					{
+						var character = Convert.ToChar(byteBuffer[i]);
+						message += character;
+					}
+
+					if(message == "" || message == "\r\n" || message == "\n" || message == Environment.NewLine)
+					{
+						return;
+					}
+
+					Invoke(new Action(delegate { CreateLog(message, DateTime.Now, RECIVED_MSG_TEXTBOX); }));
+
+					if(message.Length == 3)
+					{
+						SetSocet(message);
+					}
+
+					Invoke(new Action(delegate { SOCKET1_STATE_LABEL.Text = (IsSocket[0] ? "ON" : "OFF"); }));
+					Invoke(new Action(delegate { SOCKET2_STATE_LABEL.Text = (IsSocket[1] ? "ON" : "OFF"); }));
+				}
+				catch(Exception ex)
+				{
+					//Actual do nothing because of threads
+					//ExceptionHandler(ex);
+				}
+			}
+		}
+
+		/**********************************************************************************************************************************************/
+		/*	BUTTONS	*/
 
 		private void SOCKET1_BUTTON_Click(object sender, EventArgs e)
 		{
@@ -121,9 +233,9 @@ namespace ESP
 
 					MSG_READER_WORKER.RunWorkerAsync();
 
-					ESP_CONNECT_BUTTON.Enabled = true;
-					ESP_IP.Enabled = false;
-					ESP_PORT.Enabled = false;
+					SEND_MSG_RICHBOX.Text = ToBeSendOldValue;
+
+					SetElementsAvaible(IsConnected);
 				}
 				else
 				{
@@ -133,10 +245,12 @@ namespace ESP
 					ESP_CONNECT_BUTTON.Enabled = false;
 
 					SOCKET1_STATE_LABEL.Text = "-";
-					IsSocket[0] = false;
-
 					SOCKET2_STATE_LABEL.Text = "-";
-					IsSocket[1] = false;
+
+					for(var i = 0; i < IsSocket.Length; i++)
+					{
+						IsSocket[i] = false;
+					}
 
 					_tcp.Tcp.Close();
 
@@ -144,9 +258,10 @@ namespace ESP
 
 					_tcp = new TCP();
 
-					ESP_CONNECT_BUTTON.Enabled = true;
-					ESP_IP.Enabled = true;
-					ESP_PORT.Enabled = true;
+					ToBeSendOldValue = SEND_MSG_RICHBOX.Text;
+					SEND_MSG_RICHBOX.Text = "";
+
+					SetElementsAvaible(IsConnected);
 				}
 			}
 			catch(Exception ex)
@@ -154,7 +269,8 @@ namespace ESP
 				ExceptionHandler(ex);
 				ESP_IP.Text = oldValue;
 				IsConnected = false;
-				ESP_CONNECT_BUTTON.Enabled = true;
+				SetElementsAvaible(IsConnected);
+				SEND_MSG_RICHBOX.Text = "";
 			}
 
 			ESP_CONNECT_BUTTON.Text = IsConnected ? "Disconnect" : "Connect";
@@ -163,6 +279,21 @@ namespace ESP
 			Thread.Sleep(1000);
 			SendMsg(@"getStatus()");
 		}
+
+		private void SEND_TO_SERV_BUTTON_CLICK_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				SendMsg(SEND_MSG_RICHBOX.Text);
+			}
+			catch (Exception ex)
+			{
+				ExceptionHandler(ex);
+			}
+		}
+
+		/**********************************************************************************************************************************************/
+		/*	ON TEXT CHANGE DEDICATED METHODS	*/
 
 		private void ESP_PORT_TextChanged(object sender, EventArgs e)
 		{
@@ -192,63 +323,25 @@ namespace ESP
 			}
 		}
 
-		private void MSG_READER_WORKER_DoWork(object sender, DoWorkEventArgs e)
+		private void SEND_MSG_RICHBOX_TextChanged(object sender, EventArgs e)
 		{
-			while(IsConnected)
-			{
-				Thread.Sleep(500);
-				var byteBuffer = new byte[BufferSize];
-				var message = "";
-
-				try
-				{
-					if(MSG_READER_WORKER != null && (MSG_READER_WORKER.IsBusy && !MSG_READER_WORKER.CancellationPending))
-					{
-						_tcp.StreamData = _tcp.Tcp.GetStream();
-						var numberOfRecived = _tcp.StreamData.Read(byteBuffer, 0, BufferSize);
-
-						for(var i = 0; i < numberOfRecived; i++)
-						{
-							var character = Convert.ToChar(byteBuffer[i]);
-							message += character;
-						}
-
-						Invoke(new Action(delegate { CreateLog(message, DateTime.Now, RECIVED_MSG_TEXTBOX); }));
-
-						if(message.Length == 3)
-						{
-							switch(message[0])
-							{
-								case '1':
-									IsSocket[0] = true;
-									break;
-
-								case '0':
-									IsSocket[0] = false;
-									break;
-							}
-
-							switch(message[1])
-							{
-								case '1':
-									IsSocket[1] = true;
-									break;
-
-								case '0':
-									IsSocket[1] = false;
-									break;
-							}
-						}
-
-						Invoke(new Action(delegate { SOCKET1_STATE_LABEL.Text = (IsSocket[0] ? "ON" : "OFF"); }));
-						Invoke(new Action(delegate { SOCKET2_STATE_LABEL.Text = (IsSocket[1] ? "ON" : "OFF"); }));
-					}
-				}
-				catch(Exception ex)
-				{
-					//Do nothing
-				}
-			}
+			ToBeSend = "";
+			ToBeSend = SEND_MSG_RICHBOX.Text;
 		}
+
+		/**********************************************************************************************************************************************/
+		/*	LIST CLICK EVENT HANDLERS	*/
+
+		private void RECIVED_MSG_TEXTBOX_Click(object sender, EventArgs e)
+		{
+			Clipboard.SetText(RECIVED_MSG_TEXTBOX.SelectedItem.ToString());
+		}
+
+		private void SENT_MSG_TEXTBOX_Click(object sender, EventArgs e)
+		{
+			Clipboard.SetText(RECIVED_MSG_TEXTBOX.SelectedItem.ToString());
+		}
+
+		/**********************************************************************************************************************************************/
 	}
 }

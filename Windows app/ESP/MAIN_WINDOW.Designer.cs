@@ -45,6 +45,8 @@
 			this.RECIVED_MSG_TEXTBOX = new System.Windows.Forms.ListBox();
 			this.SENT_MESSAGE_LABEL = new System.Windows.Forms.Label();
 			this.SENT_MSG_TEXTBOX = new System.Windows.Forms.ListBox();
+			this.SEND_TO_SERV_BUTTON_CLICK = new System.Windows.Forms.Button();
+			this.SEND_MSG_RICHBOX = new System.Windows.Forms.RichTextBox();
 			this.tabControl1.SuspendLayout();
 			this.TAB_CONNECTION.SuspendLayout();
 			this.TAB_SOCKETS.SuspendLayout();
@@ -70,6 +72,7 @@
 			// 
 			// SOCKET1_BUTTON
 			// 
+			this.SOCKET1_BUTTON.Enabled = false;
 			this.SOCKET1_BUTTON.Location = new System.Drawing.Point(10, 10);
 			this.SOCKET1_BUTTON.Name = "SOCKET1_BUTTON";
 			this.SOCKET1_BUTTON.Size = new System.Drawing.Size(73, 26);
@@ -80,7 +83,8 @@
 			// 
 			// SOCKET2_BUTTON
 			// 
-			this.SOCKET2_BUTTON.Location = new System.Drawing.Point(10, 40);
+			this.SOCKET2_BUTTON.Enabled = false;
+			this.SOCKET2_BUTTON.Location = new System.Drawing.Point(10, 42);
 			this.SOCKET2_BUTTON.Name = "SOCKET2_BUTTON";
 			this.SOCKET2_BUTTON.Size = new System.Drawing.Size(73, 26);
 			this.SOCKET2_BUTTON.TabIndex = 3;
@@ -100,7 +104,7 @@
 			// SOCKET2_STATE_LABEL
 			// 
 			this.SOCKET2_STATE_LABEL.AutoSize = true;
-			this.SOCKET2_STATE_LABEL.Location = new System.Drawing.Point(90, 47);
+			this.SOCKET2_STATE_LABEL.Location = new System.Drawing.Point(90, 49);
 			this.SOCKET2_STATE_LABEL.Name = "SOCKET2_STATE_LABEL";
 			this.SOCKET2_STATE_LABEL.Size = new System.Drawing.Size(10, 13);
 			this.SOCKET2_STATE_LABEL.TabIndex = 5;
@@ -108,6 +112,8 @@
 			// 
 			// ESP_CONNECT_BUTTON
 			// 
+			this.ESP_CONNECT_BUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.ESP_CONNECT_BUTTON.Location = new System.Drawing.Point(6, 46);
 			this.ESP_CONNECT_BUTTON.Name = "ESP_CONNECT_BUTTON";
 			this.ESP_CONNECT_BUTTON.Size = new System.Drawing.Size(200, 30);
@@ -153,7 +159,8 @@
 			// Label_Adres_IP
 			// 
 			this.Label_Adres_IP.AutoSize = true;
-			this.Label_Adres_IP.Location = new System.Drawing.Point(10, 5);
+			this.Label_Adres_IP.Dock = System.Windows.Forms.DockStyle.Top;
+			this.Label_Adres_IP.Location = new System.Drawing.Point(3, 3);
 			this.Label_Adres_IP.Name = "Label_Adres_IP";
 			this.Label_Adres_IP.Size = new System.Drawing.Size(60, 13);
 			this.Label_Adres_IP.TabIndex = 7;
@@ -178,9 +185,9 @@
 			this.RECIVED_MESSAGE_LABEL.AutoSize = true;
 			this.RECIVED_MESSAGE_LABEL.Location = new System.Drawing.Point(492, 9);
 			this.RECIVED_MESSAGE_LABEL.Name = "RECIVED_MESSAGE_LABEL";
-			this.RECIVED_MESSAGE_LABEL.Size = new System.Drawing.Size(108, 13);
+			this.RECIVED_MESSAGE_LABEL.Size = new System.Drawing.Size(111, 13);
 			this.RECIVED_MESSAGE_LABEL.TabIndex = 10;
-			this.RECIVED_MESSAGE_LABEL.Text = "Received from server";
+			this.RECIVED_MESSAGE_LABEL.Text = "Received from server:";
 			// 
 			// MSG_READER_WORKER
 			// 
@@ -189,35 +196,67 @@
 			// 
 			// RECIVED_MSG_TEXTBOX
 			// 
+			this.RECIVED_MSG_TEXTBOX.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.RECIVED_MSG_TEXTBOX.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.RECIVED_MSG_TEXTBOX.FormattingEnabled = true;
 			this.RECIVED_MSG_TEXTBOX.Location = new System.Drawing.Point(495, 25);
 			this.RECIVED_MSG_TEXTBOX.Name = "RECIVED_MSG_TEXTBOX";
-			this.RECIVED_MSG_TEXTBOX.Size = new System.Drawing.Size(200, 95);
+			this.RECIVED_MSG_TEXTBOX.Size = new System.Drawing.Size(229, 199);
 			this.RECIVED_MSG_TEXTBOX.TabIndex = 11;
+			this.RECIVED_MSG_TEXTBOX.Click += new System.EventHandler(this.RECIVED_MSG_TEXTBOX_Click);
 			// 
 			// SENT_MESSAGE_LABEL
 			// 
+			this.SENT_MESSAGE_LABEL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.SENT_MESSAGE_LABEL.AutoSize = true;
 			this.SENT_MESSAGE_LABEL.Location = new System.Drawing.Point(263, 9);
 			this.SENT_MESSAGE_LABEL.Name = "SENT_MESSAGE_LABEL";
-			this.SENT_MESSAGE_LABEL.Size = new System.Drawing.Size(73, 13);
+			this.SENT_MESSAGE_LABEL.Size = new System.Drawing.Size(76, 13);
 			this.SENT_MESSAGE_LABEL.TabIndex = 14;
-			this.SENT_MESSAGE_LABEL.Text = "Sent to server";
+			this.SENT_MESSAGE_LABEL.Text = "Sent to server:";
 			// 
 			// SENT_MSG_TEXTBOX
 			// 
+			this.SENT_MSG_TEXTBOX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.SENT_MSG_TEXTBOX.FormattingEnabled = true;
 			this.SENT_MSG_TEXTBOX.Location = new System.Drawing.Point(266, 25);
 			this.SENT_MSG_TEXTBOX.Name = "SENT_MSG_TEXTBOX";
-			this.SENT_MSG_TEXTBOX.Size = new System.Drawing.Size(200, 95);
+			this.SENT_MSG_TEXTBOX.Size = new System.Drawing.Size(200, 199);
 			this.SENT_MSG_TEXTBOX.TabIndex = 15;
+			this.SENT_MSG_TEXTBOX.Click += new System.EventHandler(this.SENT_MSG_TEXTBOX_Click);
+			// 
+			// SEND_TO_SERV_BUTTON_CLICK
+			// 
+			this.SEND_TO_SERV_BUTTON_CLICK.Enabled = false;
+			this.SEND_TO_SERV_BUTTON_CLICK.Location = new System.Drawing.Point(163, 128);
+			this.SEND_TO_SERV_BUTTON_CLICK.Name = "SEND_TO_SERV_BUTTON_CLICK";
+			this.SEND_TO_SERV_BUTTON_CLICK.Size = new System.Drawing.Size(75, 95);
+			this.SEND_TO_SERV_BUTTON_CLICK.TabIndex = 16;
+			this.SEND_TO_SERV_BUTTON_CLICK.Text = "Send to server";
+			this.SEND_TO_SERV_BUTTON_CLICK.UseVisualStyleBackColor = true;
+			this.SEND_TO_SERV_BUTTON_CLICK.Click += new System.EventHandler(this.SEND_TO_SERV_BUTTON_CLICK_Click);
+			// 
+			// SEND_MSG_RICHBOX
+			// 
+			this.SEND_MSG_RICHBOX.Enabled = false;
+			this.SEND_MSG_RICHBOX.Location = new System.Drawing.Point(12, 128);
+			this.SEND_MSG_RICHBOX.Name = "SEND_MSG_RICHBOX";
+			this.SEND_MSG_RICHBOX.Size = new System.Drawing.Size(145, 95);
+			this.SEND_MSG_RICHBOX.TabIndex = 17;
+			this.SEND_MSG_RICHBOX.Text = "";
+			this.SEND_MSG_RICHBOX.TextChanged += new System.EventHandler(this.SEND_MSG_RICHBOX_TextChanged);
 			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(706, 136);
+			this.ClientSize = new System.Drawing.Size(735, 246);
+			this.Controls.Add(this.SEND_MSG_RICHBOX);
+			this.Controls.Add(this.SEND_TO_SERV_BUTTON_CLICK);
 			this.Controls.Add(this.SENT_MSG_TEXTBOX);
 			this.Controls.Add(this.SENT_MESSAGE_LABEL);
 			this.Controls.Add(this.RECIVED_MSG_TEXTBOX);
@@ -254,6 +293,8 @@
 		private System.Windows.Forms.ListBox RECIVED_MSG_TEXTBOX;
 		private System.Windows.Forms.Label SENT_MESSAGE_LABEL;
 		private System.Windows.Forms.ListBox SENT_MSG_TEXTBOX;
+		private System.Windows.Forms.Button SEND_TO_SERV_BUTTON_CLICK;
+		private System.Windows.Forms.RichTextBox SEND_MSG_RICHBOX;
 	}
 }
 
