@@ -10,7 +10,7 @@ namespace ESP
 	public partial class MainWindow : Form
 	{
 		/**********************************************************************************************************************************************/
-		/* INITIALIZATION OF PROGRAM	*/
+		/* PROGRAM COMPONENTS	*/
 
 		public MainWindow()
 		{
