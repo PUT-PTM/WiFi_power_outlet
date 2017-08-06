@@ -248,7 +248,6 @@
 			this.SEND_MSG_RICHBOX.Size = new System.Drawing.Size(145, 95);
 			this.SEND_MSG_RICHBOX.TabIndex = 17;
 			this.SEND_MSG_RICHBOX.Text = "";
-			this.SEND_MSG_RICHBOX.TextChanged += new System.EventHandler(this.SEND_MSG_RICHBOX_TextChanged);
 			// 
 			// MainWindow
 			// 
