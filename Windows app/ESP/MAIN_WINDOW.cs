@@ -19,11 +19,18 @@ namespace ESP
 
 		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			MSG_READER_WORKER.CancelAsync();
-
-			if(IsConnected)
+			try
 			{
-				_tcp.Tcp.Close();
+				MSG_READER_WORKER.CancelAsync();
+
+				if (IsConnected)
+				{
+					_tcp.Tcp.Close();
+				}
+			}
+			catch (Exception ex)
+			{
+				ExceptionHandler(ex);
 			}
 		}
 
@@ -69,16 +76,24 @@ namespace ESP
 
 		private void SendMsg(string text)
 		{
-			text += "\r\n";
+			try
+			{
+				text += "\r\n";
 
-			/*	TCP allows only to sent bytes neither string nor int	*/
-			var msg = _tcp.Ascii.GetBytes(text);
+				/*	TCP allows only to sent bytes neither string nor int	*/
+				var msg = _tcp.Ascii.GetBytes(text);
 
-			/*	Write some data to TCP stream 	*/
-			_tcp.StreamData.Write(msg, 0, msg.Length);
+				/*	Write some data to TCP stream 	*/
+				_tcp.StreamData.Write(msg, 0, msg.Length);
 
-			/*	Get information to user that he/she send something	*/
-			Invoke(new Action(delegate { CreateLog(text, DateTime.Now, SENT_MSG_TEXTBOX); }));
+				/*	Notify user that he/she send something	*/
+				Invoke(new Action(delegate { CreateLog(text, DateTime.Now, SENT_MSG_TEXTBOX); }));
+			}
+			catch (Exception ex)
+			{
+				ExceptionHandler(ex);
+			}
+
 		}
 
 		private void CreateLog(string msg, DateTime time, ListBox worker)
@@ -182,7 +197,7 @@ namespace ESP
 						message += character;
 					}
 
-					/*	'Empty strings' are ignored	*/
+					/*	'Empty' strings are ignored	*/
 					if(message == "" || message == "\r\n" || message == "\n" || message == Environment.NewLine)
 					{
 						return;
@@ -309,14 +324,7 @@ namespace ESP
 
 		private void SEND_TO_SERV_BUTTON_CLICK_Click(object sender, EventArgs e)
 		{
-			try
-			{
-				SendMsg(SEND_MSG_RICHBOX.Text);
-			}
-			catch(Exception ex)
-			{
-				ExceptionHandler(ex);
-			}
+			SendMsg(SEND_MSG_RICHBOX.Text);
 		}
 
 		/**********************************************************************************************************************************************/
@@ -355,12 +363,26 @@ namespace ESP
 
 		private void RECIVED_MSG_TEXTBOX_Click(object sender, EventArgs e)
 		{
-			Clipboard.SetText(RECIVED_MSG_TEXTBOX.SelectedItem.ToString());
+			try
+			{
+				Clipboard.SetText(RECIVED_MSG_TEXTBOX.SelectedItem.ToString());
+			}
+			catch (Exception ex)
+			{
+				ExceptionHandler(ex);
+			}
 		}
 
 		private void SENT_MSG_TEXTBOX_Click(object sender, EventArgs e)
 		{
-			Clipboard.SetText(RECIVED_MSG_TEXTBOX.SelectedItem.ToString());
+			try
+			{
+				Clipboard.SetText(SENT_MSG_TEXTBOX.SelectedItem.ToString());
+			}
+			catch(Exception ex)
+			{
+				ExceptionHandler(ex);
+			}
 		}
 
 		/**********************************************************************************************************************************************/
