@@ -23,12 +23,12 @@ namespace ESP
 			{
 				MSG_READER_WORKER.CancelAsync();
 
-				if (IsConnected)
+				if(IsConnected)
 				{
 					_tcp.Tcp.Close();
 				}
 			}
-			catch (Exception ex)
+			catch(Exception ex)
 			{
 				ExceptionHandler(ex);
 			}
@@ -89,11 +89,10 @@ namespace ESP
 				/*	Notify user that he/she send something	*/
 				Invoke(new Action(delegate { CreateLog(text, DateTime.Now, SENT_MSG_TEXTBOX); }));
 			}
-			catch (Exception ex)
+			catch(Exception ex)
 			{
 				ExceptionHandler(ex);
 			}
-
 		}
 
 		private void CreateLog(string msg, DateTime time, ListBox worker)
@@ -367,7 +366,7 @@ namespace ESP
 			{
 				Clipboard.SetText(RECIVED_MSG_TEXTBOX.SelectedItem.ToString());
 			}
-			catch (Exception ex)
+			catch(Exception ex)
 			{
 				ExceptionHandler(ex);
 			}
