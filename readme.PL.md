@@ -46,6 +46,20 @@ FT232 lub inny konwerter USART<->USB dla testów
 |   VCC   |  VCC 3V | - |
 |  CH_PD  |  VCC 3V | - |
 
+               +----------------+
+               | +-+ +-+ +-+ +- |
+               | | | | | | | |  |
+               | | +-+ +-+ +-+  |
+               | +------------- |
+               | |  ESP8266-01  |
+             .-|-----.    .-----|-.
+     GPIO2 o-  |GND GPI2 GPI0 RX|  -o GPIO0
+     GND   o---|--O   O   O   O-|---o Rx
+     Tx    o---|--O   O   O   O-|---o VCC
+     CH_PD o-  |TX CH_PD RST VCC| .-o RST
+             \ +----------------+ |
+              `-------'    `------'
+
 Zaleca się użycie zewnętrznego źródła zasilania dla ESP8266.  
 Tx/Rx i Rx/Tx w kolumnie FT232 oznaczają zależność od testowanego kierunku komunikacji.  
 Należy odłączyć pin Tx od FT232 gdy ESP8266 jest podłączony do STM32.

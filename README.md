@@ -46,6 +46,20 @@ FT232 or other USART<->USB converter for debug
 |   VCC   |  VCC 3V | - |
 |  CH_PD  |  VCC 3V | - |
 
+               +----------------+
+               | +-+ +-+ +-+ +- |
+               | | | | | | | |  |
+               | | +-+ +-+ +-+  |
+               | +------------- |
+               | |  ESP8266-01  |
+             .-|-----.    .-----|-.
+     GPIO2 o-  |GND GPI2 GPI0 RX|  -o GPIO0
+     GND   o---|--O   O   O   O-|---o Rx
+     Tx    o---|--O   O   O   O-|---o VCC
+     CH_PD o-  |TX CH_PD RST VCC| .-o RST
+             \ +----------------+ |
+              `-------'    `------'
+
 External power source for ESP8266 is highly recommended.  
 Tx/Rx and Rx/Tx in FT232 column are dependent from which way communication you want to debug.  
 Disconnect FT232's Tx when ESP8266's Rx is connected to STM32.
